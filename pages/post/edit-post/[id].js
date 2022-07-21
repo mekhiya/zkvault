@@ -6,10 +6,11 @@ import dynamic from 'next/dynamic'
 import { ethers } from 'ethers'
 import { create } from 'ipfs-http-client'
 
-import {
-  contractAddress
-} from '../../config'
-import Vault from '../../artifacts/contracts/Vault.sol/Vault.json'
+// import {
+//   contractAddress
+// } from '../../config'
+import { contractAddress } from '../../../config'
+import Vault from '../../../artifacts/contracts/Vault.sol/Vault.json'
 
 const ipfsURI = 'https://ipfs.io/ipfs/'
 const client = create('https://ipfs.infura.io:5001/api/v0')
@@ -39,7 +40,7 @@ export default function Post() {
     } else {
       provider = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com/')
     }
-    const contract = new ethers.Contract(contractAddress, Blog.abi, provider)
+    const contract = new ethers.Contract(contractAddress, Vault.abi, provider)
     const val = await contract.fetchPost(id)
     const postId = val[0].toNumber()
 

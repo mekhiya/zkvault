@@ -11,7 +11,7 @@ import {
   contractAddress
 } from '../config'
 
-import Blog from '../artifacts/contracts/Vault.sol/Vault.json'
+import Vault from '../artifacts/contracts/Vault.sol/Vault.json'
 
 /* define the ipfs endpoint */
 const client = create('https://ipfs.infura.io:5001/api/v0')
@@ -68,7 +68,7 @@ function CreatePost() {
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
-      const contract = new ethers.Contract(contractAddress, Blog.abi, signer)
+      const contract = new ethers.Contract(contractAddress, Vault.abi, signer)
       console.log('contract: ', contract)
       try {
         const val = await contract.createPost(post.title, hash)

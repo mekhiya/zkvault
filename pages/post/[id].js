@@ -10,7 +10,7 @@ import { AccountContext } from '../../context'
 import {
   contractAddress, ownerAddress
 } from '../../config'
-import Blog from '../../artifacts/contracts/Vault.sol/Vault.json'
+import Vault from '../../artifacts/contracts/Vault.sol/Vault.json'
 
 const ipfsURI = 'https://ipfs.io/ipfs/'
 
@@ -71,7 +71,7 @@ export async function getStaticPaths() {
     provider = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com/')
   }
 
-  const contract = new ethers.Contract(contractAddress, Blog.abi, provider)
+  const contract = new ethers.Contract(contractAddress, Vault.abi, provider)
   const data = await contract.fetchPosts()
 
   /* then we map over the posts and create a params object passing */

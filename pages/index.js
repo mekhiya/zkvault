@@ -12,7 +12,7 @@ import {
 } from '../config'
 
 /* import Application Binary Interface (ABI) */
-import Blog from '../artifacts/contracts/Vault.sol/Vault.json'
+import Vault from '../artifacts/contracts/Vault.sol/Vault.json'
 
 export default function Home(props) {
   /* posts are fetched server side and passed in as props */
@@ -75,12 +75,13 @@ export async function getServerSideProps() {
   if (process.env.ENVIRONMENT === 'local') {
     provider = new ethers.providers.JsonRpcProvider()
   } else if (process.env.ENVIRONMENT === 'testnet') {
-    provider = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.matic.today')
+    //provider = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.matic.today')
+    provider = new ethers.providers.JsonRpcProvider('https://polygon-mumbai.g.alchemy.com/v2/kwDkVGahinYBakz22FjbxKTvQ0LWmNrS')
   } else {
     provider = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com/')
   }
 
-  const contract = new ethers.Contract(contractAddress, Blog.abi, provider)
+  const contract = new ethers.Contract(contractAddress, Vault.abi, provider)
   const data = await contract.fetchPosts()
   return {
     props: {
